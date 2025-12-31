@@ -1250,7 +1250,7 @@ static PyObject* get_catalog(PyObject *self _unused_, PyObject *args) {
 
         assert(args);
 
-        if (!PyArg_ParseTuple(args, "z:get_catalog", &id_))
+        if (!PyArg_ParseTuple(args, "s:get_catalog", &id_))
                 return NULL;
 
         r = sd_id128_from_string(id_, &id);
