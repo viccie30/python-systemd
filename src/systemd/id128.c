@@ -132,13 +132,13 @@ static PyMethodDef methods[] = {
 };
 
 static int add_id(PyObject *module, const char* name, sd_id128_t id) {
-        PyObject *obj;
+        _cleanup_Py_DECREF_ PyObject *obj;
 
         obj = make_uuid(id);
         if (!obj)
                 return -1;
 
-        return PyModule_AddObject(module, name, obj);
+        return PyModule_AddObjectRef(module, name, obj);
 }
 
 static struct PyModuleDef module = {
