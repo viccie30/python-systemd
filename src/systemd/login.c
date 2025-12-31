@@ -317,21 +317,12 @@ DISABLE_WARNING_MISSING_PROTOTYPES;
 PyMODINIT_FUNC PyInit_login(void) {
         PyObject *m;
 
-        if (PyType_Ready(&MonitorType) < 0)
-                return NULL;
-
         m = PyModule_Create(&module);
         if (!m)
                 return NULL;
 
-        if (PyModule_AddStringConstant(m, "__version__", PACKAGE_VERSION)) {
-                Py_DECREF(m);
-                return NULL;
-        }
-
-        Py_INCREF(&MonitorType);
-        if (PyModule_AddObject(m, "Monitor", (PyObject *) &MonitorType)) {
-                Py_DECREF(&MonitorType);
+        if (PyModule_AddType(m, &MonitorType) ||
+            PyModule_AddStringConstant(m, "__version__", PACKAGE_VERSION)) {
                 Py_DECREF(m);
                 return NULL;
         }

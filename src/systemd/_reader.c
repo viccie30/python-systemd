@@ -1388,9 +1388,6 @@ PyInit__reader(void)
 {
         PyObject* m;
 
-        if (PyType_Ready(&ReaderType) < 0)
-                return NULL;
-
         m = PyModule_Create(&module);
         if (!m)
                 return NULL;
@@ -1403,10 +1400,8 @@ PyInit__reader(void)
                 initialized = true;
         }
 
-        Py_INCREF(&ReaderType);
-        Py_INCREF(&MonotonicType);
-        if (PyModule_AddObject(m, "_Reader", (PyObject *) &ReaderType) ||
-            PyModule_AddObject(m, "Monotonic", (PyObject*) &MonotonicType) ||
+        if (PyModule_AddType(m, &ReaderType) ||
+            PyModule_AddType(m, &MonotonicType) ||
             PyModule_AddIntConstant(m, "NOP", SD_JOURNAL_NOP) ||
             PyModule_AddIntConstant(m, "APPEND", SD_JOURNAL_APPEND) ||
             PyModule_AddIntConstant(m, "INVALIDATE", SD_JOURNAL_INVALIDATE) ||

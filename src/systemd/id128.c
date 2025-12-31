@@ -131,16 +131,6 @@ static PyMethodDef methods[] = {
         {}        /* Sentinel */
 };
 
-static int add_id(PyObject *module, const char* name, sd_id128_t id) {
-        PyObject *obj;
-
-        obj = make_uuid(id);
-        if (!obj)
-                return -1;
-
-        return PyModule_AddObject(module, name, obj);
-}
-
 static struct PyModuleDef module = {
         PyModuleDef_HEAD_INIT,
         .m_name = "id128", /* name of module */
@@ -157,7 +147,7 @@ PyMODINIT_FUNC PyInit_id128(void) {
         if (!m)
                 return NULL;
 
-        if ( /* a series of lines like 'add_id() ||' follow */
+        if ( /* a series of lines like 'PyModule_Add() ||' follow */
 #define JOINER ||
 #include "id128-constants.h"
 #undef JOINER

@@ -26,7 +26,7 @@ def process(includefile, docfile, *headers):
     with open(includefile, 'wt') as out:
         print(f'Writing {out.name}…')
         for name, value in defs:
-            print(f'add_id(m, "{name}", {name}) JOINER', file=out)
+            print(f'PyModule_Add(m, "{name}", make_uuid({name})) JOINER', file=out)
 
     with open(headers[0], 'wt') as out:
         print(f'Writing {out.name}…')
