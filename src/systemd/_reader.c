@@ -107,6 +107,10 @@ static int strv_converter(PyObject* obj, void *_result) {
                 return 0;
 
         Py_ssize_t len = PySequence_Length(obj);
+        if (len < 0) {
+                return 0;
+        }
+
         *result = new0(char*, len + 1);
         if (!*result) {
                 set_error(-ENOMEM, NULL, NULL);
@@ -166,6 +170,10 @@ static int intlist_converter(PyObject* obj, int **_result, size_t *_len) {
                 return 0;
 
         Py_ssize_t len = PySequence_Length(obj);
+        if (len < 0) {
+                return 0;
+        }
+
         _cleanup_free_ int *result = new0(int, len);
 
         if (!result) {
