@@ -13,7 +13,8 @@ from ._journal import __version__, sendv, stream_fd
 from ._reader import (_Reader, NOP, APPEND, INVALIDATE,
                       LOCAL_ONLY, RUNTIME_ONLY,
                       SYSTEM, SYSTEM_ONLY, CURRENT_USER,
-                      OS_ROOT,
+                      OS_ROOT, ALL_NAMESPACES, INCLUDE_DEFAULT_NAMESPACE,
+                      TAKE_DIRECTORY_FD, ASSUME_IMMUTABLE, SYSTEM_ONLY,
                       _get_catalog, Monotonic)
 from . import id128 as _id128
 
