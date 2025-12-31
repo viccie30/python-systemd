@@ -133,7 +133,7 @@ static PyMethodDef methods[] = {
 
 static struct PyModuleDef module = {
         PyModuleDef_HEAD_INIT,
-        .m_name = "id128", /* name of module */
+        .m_name = "systemd.id128", /* name of module */
         .m_doc = module__doc__, /* module documentation */
         .m_size = -1, /* size of per-interpreter state of the module */
         .m_methods = methods,
