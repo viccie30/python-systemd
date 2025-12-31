@@ -294,7 +294,7 @@ static PyMethodDef Monitor_methods[] = {
 
 static PyTypeObject MonitorType = {
         PyVarObject_HEAD_INIT(NULL, 0)
-        .tp_name = "login.Monitor",
+        .tp_name = "systemd.login.Monitor",
         .tp_basicsize = sizeof(Monitor),
         .tp_dealloc = (destructor) Monitor_dealloc,
         .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
@@ -306,9 +306,9 @@ static PyTypeObject MonitorType = {
 
 static struct PyModuleDef module = {
         PyModuleDef_HEAD_INIT,
-        .m_name = "login",      /* name of module */
-        .m_doc = module__doc__, /* module documentation, may be NULL */
-        .m_size = -1,           /* size of per-interpreter state of the module */
+        .m_name = "systemd.login", /* name of module */
+        .m_doc = module__doc__,    /* module documentation, may be NULL */
+        .m_size = -1,              /* size of per-interpreter state of the module */
         .m_methods = methods,
         .m_slots = NULL,
 };

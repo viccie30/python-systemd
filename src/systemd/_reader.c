@@ -57,7 +57,7 @@ static PyStructSequence_Field MonotonicType_fields[] = {
 };
 
 static PyStructSequence_Desc Monotonic_desc = {
-        (char*) "journal.Monotonic",
+        (char*) "systemd.journal.Monotonic",
         MonotonicType__doc__,
         MonotonicType_fields,
         2,
@@ -1356,7 +1356,7 @@ static PyMethodDef Reader_methods[] = {
 
 static PyTypeObject ReaderType = {
         PyVarObject_HEAD_INIT(NULL, 0)
-        .tp_name = "_reader._Reader",
+        .tp_name = "systemd._reader._Reader",
         .tp_basicsize = sizeof(Reader),
         .tp_dealloc = (destructor) Reader_dealloc,
         .tp_flags = Py_TPFLAGS_DEFAULT | Py_TPFLAGS_BASETYPE,
@@ -1374,7 +1374,7 @@ static PyMethodDef methods[] = {
 
 static PyModuleDef module = {
         PyModuleDef_HEAD_INIT,
-        .m_name = "_reader",
+        .m_name = "systemd._reader",
         .m_doc = module__doc__,
         .m_size = -1,
         .m_methods = methods,
