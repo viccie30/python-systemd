@@ -22,9 +22,19 @@
 #define HAVE_HAS_RUNTIME_FILES     (LIBSYSTEMD_VERSION >= 229)
 #define HAVE_HAS_PERSISTENT_FILES  (LIBSYSTEMD_VERSION >= 229)
 
+#if LIBSYSTEMD_VERSION < 256
+#  define SD_JOURNAL_ASSUME_IMMUTABLE  (1 << 8)
+#endif
+
+#if LIBSYSTEMD_VERSION < 254
+#  define SD_JOURNAL_TAKE_DIRECTORY_FD  (1 << 7)
+#endif
+
 #if LIBSYSTEMD_VERSION >= 245
 #  define HAVE_JOURNAL_OPEN_NAMESPACE 1
 #else
+#  define SD_JOURNAL_ALL_NAMESPACES             (1 << 5)
+#  define SD_JOURNAL_INCLUDE_DEFAULT_NAMESPACE  (1 << 6)
 #  define HAVE_JOURNAL_OPEN_NAMESPACE 0
 #endif
 
@@ -1422,6 +1432,10 @@ PyInit__reader(void)
             PyModule_AddIntConstant(m, "SYSTEM_ONLY", SD_JOURNAL_SYSTEM) ||
             PyModule_AddIntConstant(m, "CURRENT_USER", SD_JOURNAL_CURRENT_USER) ||
             PyModule_AddIntConstant(m, "OS_ROOT", SD_JOURNAL_OS_ROOT) ||
+            PyModule_AddIntConstant(m, "ALL_NAMESPACES", SD_JOURNAL_ALL_NAMESPACES) ||
+            PyModule_AddIntConstant(m, "INCLUDE_DEFAULT_NAMESPACE", SD_JOURNAL_INCLUDE_DEFAULT_NAMESPACE) ||
+            PyModule_AddIntConstant(m, "TAKE_DIRECTORY_FD", SD_JOURNAL_TAKE_DIRECTORY_FD) ||
+            PyModule_AddIntConstant(m, "ASSUME_IMMUTABLE", SD_JOURNAL_ASSUME_IMMUTABLE) ||
             PyModule_AddStringConstant(m, "__version__", PACKAGE_VERSION)) {
                 Py_DECREF(m);
                 return NULL;
