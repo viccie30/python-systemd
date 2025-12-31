@@ -88,7 +88,7 @@ static int null_converter(PyObject* obj, void *_result) {
         if (!obj)
                 return 0;
 
-        if (obj == Py_None)
+        if (Py_IsNone(obj))
                 *result = NULL;
         else
                 *result = obj;
