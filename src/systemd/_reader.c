@@ -211,8 +211,8 @@ PyDoc_STRVAR(Reader__doc__,
              "(supported since systemd v245). Instead of opening the system journal, argument\n"
              "`path` may specify a directory which contains the journal. It maybe be either\n"
              "a file system path (a string), or a file descriptor (an integer). Alternatively,\n"
-             "argument `files` may specify a list of journal file names. Note that `flags`, `path`,\n"
-             "`files`, `directory_fd`, `namespace` are exclusive.\n\n"
+             "argument `files` may specify a list of journal file names. Note that `path`, `files`,\n"
+             "and `namespace` are exclusive.\n\n"
              "_Reader implements the context manager protocol: the journal will be closed when\n"
              "exiting the block.");
 static int Reader_init(Reader *self, PyObject *args, PyObject *keywds) {
@@ -228,9 +228,9 @@ static int Reader_init(Reader *self, PyObject *args, PyObject *keywds) {
                                          null_converter, &_namespace))
                 return -1;
 
-        if (!!_path + !!_files > 1) {
+        if (!!_path + !!_files + !!_namespace > 1) {
                 PyErr_SetString(PyExc_ValueError,
-                                "path and files cannot be specified simultaneously");
+                                "path, files, and namespace cannot be specified simultaneously");
                 return -1;
         }
 
