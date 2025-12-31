@@ -10,9 +10,6 @@
 #include "macro.h"
 #include "strv.h"
 
-/* This needs to be below Python.h include for some reason */
-#include <datetime.h>
-
 #if defined(LIBSYSTEMD_VERSION) || LIBSYSTEMD_JOURNAL_VERSION > 204
 #  define HAVE_JOURNAL_OPEN_FILES 1
 #else
@@ -1390,8 +1387,6 @@ PyMODINIT_FUNC
 PyInit__reader(void)
 {
         PyObject* m;
-
-        PyDateTime_IMPORT;
 
         if (PyType_Ready(&ReaderType) < 0)
                 return NULL;
