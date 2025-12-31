@@ -1396,7 +1396,10 @@ PyInit__reader(void)
                 return NULL;
 
         if (!initialized) {
-                PyStructSequence_InitType(&MonotonicType, &Monotonic_desc);
+                if (PyStructSequence_InitType2(&MonotonicType, &Monotonic_desc) < 0) {
+                        Py_DECREF(m);
+                        return NULL;
+                }
                 initialized = true;
         }
 
