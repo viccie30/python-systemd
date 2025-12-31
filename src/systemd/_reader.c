@@ -264,6 +264,9 @@ static int Reader_init(Reader *self, PyObject *args, PyObject *keywds) {
                 _cleanup_Py_DECREF_ PyObject *item0 = NULL;
 
                 item0 = PySequence_GetItem(_files, 0);
+                if (!item0) {
+                        PyErr_Clear();
+                }
                 if (!item0 || !PyLong_Check(item0)) {
                         _cleanup_strv_free_ char **files = NULL;
 
